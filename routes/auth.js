@@ -53,7 +53,6 @@ authRouter.post('/',
             if (error) {
                 res.status(400).json({errors: [{"msg": error}]})
             }
-
             res.status(200).json({token})
             })
 
@@ -61,8 +60,6 @@ authRouter.post('/',
             res.status(400).send(error)
         }
 
-        
-        
 
     }
 )
