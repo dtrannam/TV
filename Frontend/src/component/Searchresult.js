@@ -20,7 +20,6 @@ const Searchresult = ({data}) => {
                 <li><a href= {`${data.show.url}`}>Link</a></li>
                 {data.show.rating.average ? <li>Average Rating: {data.show.rating.average}</li> : <li>No Ratings</li>}
                 <li>Summary: {desc}</li>
-                
             </ul>
             </div>
         </div>
