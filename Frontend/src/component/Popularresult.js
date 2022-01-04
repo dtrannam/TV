@@ -4,7 +4,7 @@ const Popularresults = ({data}) => {
     return (
         <div className="result" id={data.id}>
             <div className="image">
-            {dataimage ?
+            {data.image ?
                 <img src={data.image} alt={`image for ${data.title}`} /> :
                 <h3>Test Image here</h3>
             }

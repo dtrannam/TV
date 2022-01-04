@@ -1,7 +1,7 @@
 import useFetch from "../hooks/useFetch";
+import Popularresults from "./Popularresult";
 
 const Popular = () => {
-
     // Pull the data from IMDb - edit out API key later
     const {shows, errors, status} = useFetch(`https://imdb-api.com/en/API/MostPopularTVs/k_h16i7gt0`)
     // Return Data 
@@ -22,7 +22,7 @@ const Popular = () => {
         return (
             <div className="popular">
                     {shows.items.map((show) => {
-                    return <Popular data={show} />
+                    return <Popularresults data={show} />
                      })}
             </div>
 
