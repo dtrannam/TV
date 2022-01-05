@@ -2,7 +2,7 @@
 
 const Popularresults = ({data}) => {
     return (
-        <div className="result" id={data.id}>
+        <div className="popularResult" id={data.id}>
             <div className="image">
             {data.image ?
                 <img src={data.image} alt={`image for ${data.title}`} /> :
@@ -10,12 +10,10 @@ const Popularresults = ({data}) => {
             }
             </div>
             <div className="infomation">
-            <ul>
-                <h3>{data.title}</h3>
-                <li>Rank: {data.rank}</li>
-                <li><a href= {`${data.show.url}`}>Link</a></li>
-                {data.imDbRating ? <li>Average Rating: {data.imDbRating}</li> : <li>No Ratings</li>}
-            </ul>
+                <h3 className="popularTitle">{data.title}</h3>
+                <div>Current Rank: {data.rank}</div>
+                <div>Release Year: {data.year}</div>
+                {data.imDbRating ? <div>Average Rating: {data.imDbRating}</div> : <div>No Ratings</div>}
             </div>
         </div>
     )

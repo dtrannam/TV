@@ -87,3 +87,23 @@ a {
   background-color: #f1f1f1;
   text-align: center;
 }
+
+.popularResult {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 0px 5% 5%;
+}
+
+.popular {
+  display: flex; 
+  max-width: 80%;
+  flex-wrap: wrap;
+  margin-left: 10%;
+  justify-content: space-between;
+}
+
+.popularTitle {
+  max-width: 70%; 
+  overflow-wrap: break-word;
+}

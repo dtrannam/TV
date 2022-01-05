@@ -2,28 +2,43 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { useState } from 'react'
 
 const Login = () => {
-    const [formData, setFormData] = useState({
-        login: "",
-        password: ""
-    })
+    const [login, setLogin] = useState("")
+    const [password, setPassword] = useState("")
+
+
+    const loginUser = (event) => {
+        event.preventDefault()
+        console.log(login)
+        console.log(password)
+
+    }
+
+    const handleLogin = (event) => {
+        setLogin(event.target.value)
+    }
+
+    const handlePassword = (event) => {
+        setPassword(event.target.value)
+    }
+
     return (
         <div className="authorization">
-        <form action="/">
-            <div class="container">
+        <form onSubmit={loginUser}>
+            <div className="container">
                 <h1>Login</h1>
                 <hr />
                     
-                <label for="text"><b>Login</b></label>
-                <input className="authFields" type="text" placeholder="Enter a Login" name="login" id="login" required/>
+                <label htmlFor="text"><b>Login</b></label>
+                <input className="authFields" onChange={handleLogin} type="text" placeholder="Enter a Login" value={login} name="login" id="login" required/>
 
-                <label for="psw"><b>Password</b></label>
-                <input className="authFields" type="password" placeholder="Enter Password" name="psw" id="psw" required />
+                <label htmlFor="password"><b>Password</b></label>
+                <input className="authFields" onChange={handlePassword} type="password" placeholder="Enter a Password" value={password} name="psw" id="psw" required />
                 <hr />
 
-                <button type="submit" class="registerbtn">Sign In</button>
+                <button type="submit" className="registerbtn">Sign In</button>
             </div>
             
-            <div class="container signin">
+            <div className="container signin">
                 <p>Don't have an account? <Link to="/Register">Register Here</Link>.</p>
             </div>
         </form>

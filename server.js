@@ -22,4 +22,4 @@ app.use('/api/tracker', trackerRouter)
 
 // App Run
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log('Port is listening'))
+app.listen(PORT, () => console.log(`Port is listening on ${PORT}`))
