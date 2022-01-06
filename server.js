@@ -4,11 +4,12 @@ const authRouter = require('./routes/auth');
 const trackerRouter = require('./routes/tracker');
 const app = express();
 const logger = require('./setup/middleware/logger')
-
+var cors = require('cors')
 
 // Middleware set up
 app.use(logger)
 app.use(express.json({extended: false}))
+app.use(cors())
 
 // DB Set up
 const connectDB = require('./setup/db')

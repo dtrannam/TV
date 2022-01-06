@@ -1,4 +1,4 @@
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { useState } from 'react'
 
 const Login = () => {
@@ -8,9 +8,33 @@ const Login = () => {
 
     const loginUser = (event) => {
         event.preventDefault()
-        console.log(login)
-        console.log(password)
 
+        if (login == "" || password == "") {
+            alert("Enter a valid login or password")
+        } else {
+            const body = {
+                login,
+                password
+            }
+
+            fetch('http://localhost:8000/api/auth', {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify(body)  
+            }).then((res) => {
+                {
+                    if(!res.ok) {
+                        throw Error("Failed to login - Please try again")
+                    }
+                    return res.json()}
+            }).then(data => {
+                console.log(data)
+
+            }).catch(error => {  
+                setPassword("");
+                alert(error);
+            })
+        }
     }
 
     const handleLogin = (event) => {

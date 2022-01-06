@@ -1,4 +1,4 @@
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { useState } from 'react'
 
 const Register = () => {
@@ -8,7 +8,7 @@ const Register = () => {
 
     const registerUser = (event) => {
         event.preventDefault()
-        if (password != password2) {
+        if (password !== password2) {
             alert('Reconfirm password')
         } else if (password.length < 6) {
             alert('Password must be longer than 6 characters')
@@ -17,9 +17,25 @@ const Register = () => {
                 login,
                 password
             }
-            console.log(body)
+
+            fetch('http://localhost:8000/api/user', {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify(body)  
+            }).then((res) => {
+                {
+                    return res.json()}
+            }).then(data => {
+                if (data['errors']) {
+                    throw Error (data['errors'][0]['msg'])
+                } 
+                console.log(data)
+            }).catch(error => 
+                alert(error))
         }
+
     }
+    
 
     const handleLogin = (event) => {
         setLogin(event.target.value)

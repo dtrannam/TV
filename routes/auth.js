@@ -17,11 +17,13 @@ const secret = process.env.SECRET
 authRouter.post('/', 
     body('login').not().isEmpty().withMessage('Login is required'),
     body('password').not().isEmpty().withMessage('Password is required'),
+    
     async (req, res) => {
         try {
             
         // Response Validations
         const errors = validationResult(req);
+
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array()})
         }
@@ -31,13 +33,14 @@ authRouter.post('/',
 
         // Check if login exist
         if (!user) {
-            res.status(401).json({errors: [{"msg": "Failed to login"}]})
+            return res.status(401).json({errors: [{"msg": "Failed to login"}]})
         }
 
         // Check to see if password is correct
         const result = await bcrypt.compare(password, user.password)
+
         if (!result) {
-            res.status(401).json({errors: [{"msg": "Failed to login"}]})
+            return res.status(401).json({errors: [{"msg": "Failed to login"}]})
         }
 
         // JWT Set up
@@ -48,19 +51,16 @@ authRouter.post('/',
                 login: user.login
             }
         }
-
-        jwt.sign(payload, secret, {expiresIn: "3d"}, (error, token) => {
+        
+        jwt.sign(payload, secret, {expiresIn: "3d"}, function (error, token) {
             if (error) {
-                res.status(400).json({errors: [{"msg": error}]})
-            }
-            res.status(200).json({token})
-            })
-
+                return res.status(400).json({errors: [{"msg": error}]})
+            } else {
+                return res.status(200).json({token})
+            }})
         } catch (error) {
-            res.status(400).send(error)
+            return res.status(400).send(error)
         }
-
-
     }
 )
 
