@@ -1,7 +1,7 @@
 import { Link, Redirect } from 'react-router-dom'
 import { useState } from 'react'
 
-const Register = () => {
+const Register = ({auth, setAuth}) => {
     const [login, setLogin] = useState("")
     const [password, setPassword] = useState("")
     const [password2, setPassword2] = useState("")
@@ -30,6 +30,12 @@ const Register = () => {
                     throw Error (data['errors'][0]['msg'])
                 } 
                 console.log(data)
+                alert('Account created successful')
+                setAuth({
+                    login: data['login'],
+                    token:  data['token']
+                })
+                window.location.replace = "http://localhost:5000/"
             }).catch(error => 
                 alert(error))
         }

@@ -1,5 +1,6 @@
 import './App.css';
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import { useState } from 'react';
 import Navbar from './component/Navbar'
 import Searchpage from './component/Searchpage'
 import Popular from './component/Popular'
@@ -9,17 +10,21 @@ import Home from './component/Home';
 import Frontpage from './component/Frontpage';
 
 function App() {
+  const [auth, setAuth] = useState({
+    login: null,
+    token: null
+  })
   return (
     <BrowserRouter>
     <div className="App">
-      <Navbar />
+      <Navbar auth={auth} setAuth={setAuth}/>
       <Routes>
         <Route path='/' element={<Frontpage/>}/>
         <Route path='/Home' element={<Home/>} />
         <Route path="/Search" element={<Searchpage/>}/>
         <Route path="/Popular" element={<Popular/>}/>
-        <Route path="/Register" element={<Register/>}/>
-        <Route path="/Login" element={<Login/>}/>
+        <Route path="/Register" element={<Register auth={auth} setAuth={setAuth}/>}/>
+        <Route path="/Login"  element={<Login auth={auth} setAuth={setAuth}/>}/>
       </Routes>
     </div>
     </BrowserRouter>

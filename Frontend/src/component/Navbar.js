@@ -3,27 +3,14 @@ import SearchBar from './Searchbar'
 import Popular from './Popular'
 import React, { useState, useEffect } from 'react';
 
-const NavBar = () => {
-
-    useEffect(() => {
-        function checkUserData() {
-            console.log('testing')
-          }
-        
-      
-        window.addEventListener('storage', checkUserData)
-      
-        return () => {
-          window.removeEventListener('storage', checkUserData)
-        }
-    }, [])
-
+const NavBar = ({auth, setAuth}) => {
 
     return (
         <nav className='navbar'>
             <Link to="/Home"><h1>Television Tracker</h1></Link>
             <Link to="/popular" element={<Popular/>}>Top Shows</Link>
-            {window.localStorage.login ? <Link to="/Login">Log Out</Link> : <Link to="/Login">Login</Link>}            
+            {auth.login ? <Link  to="/Login" onClick={() => setAuth({login: null, token: null})}>{auth.login} - Log Out</Link> : <Link to="/Login">Login</Link>}   
+            <button onClick={() => console.log(auth)}/>         
             <SearchBar />
         </nav>
     )

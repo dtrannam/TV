@@ -1,7 +1,7 @@
 import { Link, Redirect } from 'react-router-dom'
 import { useState } from 'react'
 
-const Login = () => {
+const Login = ({auth, setAuth}) => {
     const [login, setLogin] = useState("")
     const [password, setPassword] = useState("")
 
@@ -30,10 +30,10 @@ const Login = () => {
             }).then(data => {
                 // TESTING STATUS
                 console.log(data)
-                window.localStorage.setItem('token', data['token'])
-                window.localStorage.setItem('login', data['login'])
-                alert('Login Successful')
-
+                setAuth({
+                    login: data['login'],
+                    token:  data['token']
+                })
             }).catch(error => {  
                 setPassword("");
                 alert(error);
