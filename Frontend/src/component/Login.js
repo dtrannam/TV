@@ -28,7 +28,11 @@ const Login = () => {
                     }
                     return res.json()}
             }).then(data => {
+                // TESTING STATUS
                 console.log(data)
+                window.localStorage.setItem('token', data['token'])
+                window.localStorage.setItem('login', data['login'])
+                alert('Login Successful')
 
             }).catch(error => {  
                 setPassword("");
@@ -37,6 +41,7 @@ const Login = () => {
         }
     }
 
+    
     const handleLogin = (event) => {
         setLogin(event.target.value)
     }

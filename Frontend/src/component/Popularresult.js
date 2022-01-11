@@ -3,13 +3,13 @@
 const Popularresults = ({data}) => {
     return (
         <div className="popularResult" id={data.id}>
-            <div className="image">
+            <div className="popularImage">
             {data.image ?
-                <img src={data.image} alt={`image for ${data.title}`} /> :
+                <img className="popularImage" src={data.image} alt={`image for ${data.title}`} /> :
                 <h3>Test Image here</h3>
             }
             </div>
-            <div className="infomation">
+            <div className="popularInfo">
                 <h3 className="popularTitle">{data.title}</h3>
                 <div>Current Rank: {data.rank}</div>
                 <div>Release Year: {data.year}</div>

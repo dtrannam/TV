@@ -56,7 +56,7 @@ authRouter.post('/',
             if (error) {
                 return res.status(400).json({errors: [{"msg": error}]})
             } else {
-                return res.status(200).json({token})
+                return res.status(200).json({token, login: payload.user.login})
             }})
         } catch (error) {
             return res.status(400).send(error)

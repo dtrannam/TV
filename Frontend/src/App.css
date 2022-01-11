@@ -93,6 +93,12 @@ a {
   flex-direction: column;
   flex-wrap: wrap;
   margin: 0px 5% 5%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.popularImage {
+  height: 295px;
+  width: 210px;
 }
 
 .popular {
@@ -103,6 +109,10 @@ a {
   justify-content: space-between;
 }
 
+.popularInfo {
+  padding-top: 15px;
+  padding-left: 5%
+}
 .popularTitle {
   max-width: 70%; 
   overflow-wrap: break-word;

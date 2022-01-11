@@ -57,7 +57,7 @@ userRouter.post('/',
                     res.status(400).json({errors: [{"msg": error}]})
                 }
 
-                res.status(200).json({token})
+                res.status(200).json({token, login: payload.user.login})
             } )
 
 
