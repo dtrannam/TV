@@ -1,4 +1,4 @@
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useState } from 'react'
 
 const Register = ({auth, setAuth}) => {
@@ -33,9 +33,8 @@ const Register = ({auth, setAuth}) => {
                 alert('Account created successful')
                 setAuth({
                     login: data['login'],
-                    token:  data['token']
                 })
-                window.location.replace = "http://localhost:5000/"
+                
             }).catch(error => 
                 alert(error))
         }

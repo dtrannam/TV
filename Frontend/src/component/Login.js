@@ -1,4 +1,4 @@
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useState } from 'react'
 
 const Login = ({auth, setAuth}) => {
@@ -9,7 +9,7 @@ const Login = ({auth, setAuth}) => {
     const loginUser = (event) => {
         event.preventDefault()
 
-        if (login == "" || password == "") {
+        if (login === "" || password === "") {
             alert("Enter a valid login or password")
         } else {
             const body = {
@@ -22,17 +22,15 @@ const Login = ({auth, setAuth}) => {
               headers: {'Content-Type': 'application/json'},
               body: JSON.stringify(body)  
             }).then((res) => {
-                {
-                    if(!res.ok) {
-                        throw Error("Failed to login - Please try again")
-                    }
-                    return res.json()}
+                if(!res.ok) {
+                    throw Error("Failed to login - Please try again")
+                }
+                return res.json()
             }).then(data => {
                 // TESTING STATUS
                 console.log(data)
                 setAuth({
                     login: data['login'],
-                    token:  data['token']
                 })
             }).catch(error => {  
                 setPassword("");

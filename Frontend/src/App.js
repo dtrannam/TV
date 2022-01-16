@@ -12,7 +12,6 @@ import Frontpage from './component/Frontpage';
 function App() {
   const [auth, setAuth] = useState({
     login: null,
-    token: null
   })
   return (
     <BrowserRouter>

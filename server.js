@@ -1,10 +1,12 @@
+require('dotenv').config()
 const express = require('express');
+const app = express();
 const userRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
 const trackerRouter = require('./routes/tracker');
-const app = express();
 const logger = require('./setup/middleware/logger')
-var cors = require('cors')
+const session = require('express-session')
+const cors = require('cors')
 
 // Middleware set up
 app.use(logger)
@@ -14,6 +16,19 @@ app.use(cors())
 // DB Set up
 const connectDB = require('./setup/db')
 connectDB()
+
+// Session Set up 
+app.use(session({
+    secret: process.env.SESSION,
+    saveUninitialized: true,
+    resave: false,
+    cookie: {
+        httpOnly: true,
+        maxAge: 3600000 * 24
+    }
+
+}))
+
 
 // Routes
 app.get('/', (req, res) => res.send("App is working"))

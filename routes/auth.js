@@ -11,6 +11,16 @@ const { body, validationResult } = require('express-validator');
 const secret = process.env.SECRET
 
 
+// @route   Delete to api/auth
+// @desc    Sign out a user (delete the req.sessions)
+// @access  Private
+
+authRouter.delete('/', (req, res) => {
+    req.session.user = null
+    console.log(req.session.user)
+    res.status(204).send({})
+})
+
 // @route   POST to api/auth
 // @desc    Sign in a user
 // @access  Public
@@ -56,7 +66,15 @@ authRouter.post('/',
             if (error) {
                 return res.status(400).json({errors: [{"msg": error}]})
             } else {
-                return res.status(200).json({token, login: payload.user.login})
+                // Session Set up 
+                const userInfo = {
+                    id: user.id,
+                    login: user.login,
+                    jwt: token
+                }
+                req.session.user = userInfo
+                console.log(req.session.user)
+                return res.status(200).json({login: payload.user.login})
             }})
         } catch (error) {
             return res.status(400).send(error)

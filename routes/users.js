@@ -10,9 +10,11 @@ const User = require('../models/User')
 const { body, validationResult } = require('express-validator');
 const secret = process.env.SECRET
 
+
 // @route   POST to api/user
 // @desc    Register a user
 // @access  Public
+
 userRouter.post('/', 
     body('login').not().isEmpty().withMessage('Login must exist'),
     body('password').isLength({min: 6}).withMessage('Password must be 6 digits long'),
@@ -56,8 +58,15 @@ userRouter.post('/',
                 if (error) {
                     res.status(400).json({errors: [{"msg": error}]})
                 }
-
-                res.status(200).json({token, login: payload.user.login})
+                // Session Set up 
+                const userInfo = {
+                    id: user.id,
+                    login: user.login,
+                    jwt: token
+                }
+                req.session.user = userInfo
+                console.log(req.session.user)
+                res.status(200).json({login: payload.user.login})
             } )
 
 
